@@ -2,7 +2,7 @@ import { useState } from "react";
 import { login } from "../service/userApi";
 import { ErrorToast } from "../components/ErrorToast";
 import { OkToast } from "../components/OkToast";
-import { useNavigate } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 export const Login = () => {
 	const [email, setEmail] = useState("");
@@ -10,8 +10,7 @@ export const Login = () => {
 	const [okMessage, setOkMessage] = useState(false);
 	const [errorMessage, setErrorMessage] = useState(false);
 	const [message, setMessage] = useState("");
-	const navigate = useNavigate();
-
+	const history = useHistory();
 	const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 
@@ -21,7 +20,7 @@ export const Login = () => {
 				setOkMessage(true);
 				setMessage("Successfuly registered!");
 				setTimeout(() => {
-					return navigate("/product");
+					history.push("/product");
 				}, 1500);
 			})
 			.catch((error): void => {
