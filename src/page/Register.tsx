@@ -174,6 +174,9 @@ export const Register = () => {
 						</div>
 					)}
 				</form>
+				<div className="mt-4">
+					<a href="/">Back</a>
+				</div>
 			</div>
 		</div>
 	);
