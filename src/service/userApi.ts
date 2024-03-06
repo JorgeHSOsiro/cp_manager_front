@@ -6,7 +6,7 @@ export const login = async (email: string, password: string) => {
 			email,
 			password,
 		})
-		.catch((error) => error);
+		.then((res) => localStorage.setItem("token", res.data.token));
 };
 
 export const register = async (
