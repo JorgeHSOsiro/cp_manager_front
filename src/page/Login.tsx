@@ -1,4 +1,13 @@
+import { useEffect, useState } from "react";
+import { login } from "../service/userApi";
+
 export const Login = () => {
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+
+	useEffect(() => {
+		login(email, password);
+	}, []);
 	return (
 		<div>
 			<div className="py-16 sm:mx-auto sm:w-full sm:max-w-sm">
@@ -17,6 +26,7 @@ export const Login = () => {
 								type="email"
 								placeholder="example@example.com"
 								required
+								onChange={(e) => setEmail(e.target.value)}
 								className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
 							/>
 						</div>
@@ -37,6 +47,7 @@ export const Login = () => {
 								name="password"
 								type="password"
 								required
+								onChange={(e) => setPassword(e.target.value)}
 								className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
 							/>
 						</div>
@@ -51,12 +62,12 @@ export const Login = () => {
 							Sign in
 						</a>
 					</div>
-					<div>
-						<a href="/register" className="font-medium hover:text-indigo-500">
-							Create account
-						</a>
-					</div>
 				</form>
+				<div>
+					<a href="/register" className="font-medium hover:text-indigo-500">
+						Create account
+					</a>
+				</div>
 			</div>
 		</div>
 	);
