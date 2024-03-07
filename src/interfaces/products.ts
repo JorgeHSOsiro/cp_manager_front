@@ -9,6 +9,7 @@ export interface ProductInterface {
 }
 
 export interface ProductDefaultInterface {
+	id: number;
 	name: string;
 	brand: string;
 	model: string;
@@ -38,6 +39,7 @@ export interface ProductTypeArrayInterface {
 }
 
 export interface ProductDataInterface {
+	id: number;
 	data:
 		| ProductTypeArrayInterface
 		| ProductTypeDetailInterface

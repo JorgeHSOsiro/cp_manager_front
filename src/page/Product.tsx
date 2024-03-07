@@ -51,6 +51,7 @@ export const Product = () => {
 			<div className="flex m-2 gap-2 ">
 				{products.map((product) => (
 					<ProductCard
+						id={product.id}
 						name={product.data.name}
 						brand={product.data.brand}
 						model={product.data.model}
@@ -60,6 +61,7 @@ export const Product = () => {
 				))}
 				{productWithdetail.map((product) => (
 					<ProductCard
+						id={product.id}
 						name={product.data.name}
 						brand={product.data.details.brand}
 						model={product.data.details.model}
