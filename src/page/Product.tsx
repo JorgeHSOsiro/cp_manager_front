@@ -35,8 +35,8 @@ export const Product = () => {
 		setSearchResult(filteredProducts);
 	};
 
-	const renderProductCards = (products) => {
-		return products.map((product) => (
+	const renderProductCards = (products: any) => {
+		return products.map((product: any) => (
 			<ProductCard
 				key={product.id}
 				id={product.id}

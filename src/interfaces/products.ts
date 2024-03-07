@@ -37,11 +37,3 @@ export interface ProductTypeArrayInterface {
 	model: string;
 	data: ProductDataPriceColor[];
 }
-
-export interface ProductDataInterface {
-	id: number;
-	data:
-		| ProductTypeArrayInterface
-		| ProductTypeDetailInterface
-		| ProductInterface;
-}
