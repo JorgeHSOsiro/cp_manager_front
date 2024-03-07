@@ -80,7 +80,7 @@ export const Product = () => {
 					Add New Product
 				</a>
 			</div>
-			<div className="flex m-2 gap-2 ">
+			<div className="flex flex-wrap m-2 gap-2 ">
 				{searchResult.length === 0
 					? renderProductCards(products)
 					: renderProductCards(searchResult)}

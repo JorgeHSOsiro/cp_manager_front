@@ -15,7 +15,7 @@ export const ProductCard = ({
 		window.location.reload();
 	};
 	return (
-		<div className="block size-48 w-64 text-gray-900 border-2 border-gray-500 rounded-md shadow-md m-2 p-4 hover:border-indigo-600">
+		<div className="block size-48 w-96 text-gray-900 border-2 border-gray-500 rounded-md shadow-md m-2 p-4 hover:border-indigo-600">
 			<a href={`/product-detail/${id}`}>
 				<p className="text-lg">name: {name}</p>
 				<p>brand: {brand}</p>
