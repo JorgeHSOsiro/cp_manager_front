@@ -4,6 +4,7 @@ import api from "../service/api";
 import { InputData } from "../components/InputData";
 import { ErrorToast } from "../components/ErrorToast";
 import { OkToast } from "../components/OkToast";
+import { useHistory } from "react-router-dom";
 
 interface ParamInterface {
 	id: string;
@@ -19,8 +20,13 @@ export const UpdateProduct = () => {
 	const [errorMessage, setErrorMessage] = useState(false);
 	const [message, setMessage] = useState("");
 	const { id } = useParams<ParamInterface>();
+	const history = useHistory();
 
 	useEffect(() => {
+		const token = localStorage.getItem("token");
+		if (!token) {
+			history.push("/");
+		}
 		api.get(`/cellphones/${id}`).then((response) => {
 			if (Object.keys(response.data.data).includes("details")) {
 				setName(response.data.data.name);

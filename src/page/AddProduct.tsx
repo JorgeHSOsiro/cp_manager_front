@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { OkToast } from "../components/OkToast";
 import { ErrorToast } from "../components/ErrorToast";
 import api from "../service/api";
 import { InputData } from "../components/InputData";
+import { useHistory } from "react-router-dom";
 
 export const AddProduct = () => {
 	const [name, setName] = useState("");
@@ -14,6 +15,7 @@ export const AddProduct = () => {
 	const [errorMessage, setErrorMessage] = useState(false);
 	const [message, setMessage] = useState("");
 
+	const history = useHistory();
 	const resetForm = () => {
 		setName("");
 		setBrand("");
@@ -21,6 +23,12 @@ export const AddProduct = () => {
 		setPrice("");
 		setColor("");
 	};
+	useEffect(() => {
+		const token = localStorage.getItem("token");
+		if (!token) {
+			history.push("/");
+		}
+	}, []);
 
 	const addProduct = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
