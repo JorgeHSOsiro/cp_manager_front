@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import api from "../service/api";
 import { useHistory } from "react-router-dom";
 import { ProductCard } from "../components/ProductCard";
-import { ProductInterface, ProductDataInterface } from "../interfaces/products";
+import { ProductInterface } from "../interfaces/products";
 
 export const Product = () => {
-	const [products, setProducts] = useState<ProductInterface[]>([]);
-	const [productWithdetail, setProductWithDetail] = useState<
-		ProductInterface[]
+	const [products, setProducts] = useState<
+		ProductInterface[] | ProductInterface[]
 	>([]);
+	const [query, setQuery] = useState<string>("");
 
 	const history = useHistory();
 	useEffect(() => {
@@ -19,20 +19,7 @@ export const Product = () => {
 		} else {
 			api.get("/cellphones").then((response) => {
 				const productsApi = response.data;
-				const productsDetailList = [];
-				const productsDefault = [];
-				productsApi.forEach((product: ProductDataInterface) => {
-					if (Object.keys(product.data).includes("details")) {
-						productsDetailList.push(product);
-					} else if (Array.isArray(product.data)) {
-						return;
-					} else {
-						productsDefault.push(product);
-					}
-				});
-
-				setProductWithDetail(productsDetailList);
-				setProducts(productsDefault);
+				setProducts(productsApi);
 			});
 		}
 	}, []);
@@ -51,22 +38,25 @@ export const Product = () => {
 			<div className="flex m-2 gap-2 ">
 				{products.map((product) => (
 					<ProductCard
+						key={product.id}
 						id={product.id}
 						name={product.data.name}
-						brand={product.data.brand}
-						model={product.data.model}
+						brand={
+							Object.keys(product.data).includes("details")
+								? product.data.details.brand
+								: product.data.brand
+						}
+						model={
+							Object.keys(product.data).includes("details")
+								? product.data.details.model
+								: product.data.model
+						}
 						price={product.data.price}
-						color={product.data.color}
-					/>
-				))}
-				{productWithdetail.map((product) => (
-					<ProductCard
-						id={product.id}
-						name={product.data.name}
-						brand={product.data.details.brand}
-						model={product.data.details.model}
-						price={product.data.price}
-						color={product.data.details.color}
+						color={
+							Object.keys(product.data).includes("details")
+								? product.data.details.color
+								: product.data.color
+						}
 					/>
 				))}
 			</div>
